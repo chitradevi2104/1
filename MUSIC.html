@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Music Player UI</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+}
+
+/* Player Card */
+.player{
+  width:330px;
+  padding:22px;
+  border-radius:22px;
+  background:rgba(255,255,255,0.1);
+  backdrop-filter:blur(15px);
+  box-shadow:0 25px 50px rgba(0,0,0,0.6);
+  color:#fff;
+}
+
+/* Hidden checkbox */
+#play{
+  display:none;
+}
+
+/* Album */
+.cover{
+  width:180px;
+  height:180px;
+  margin:0 auto 18px;
+  border-radius:50%;
+  background:url("https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4") center/cover;
+  box-shadow:0 15px 30px rgba(0,0,0,0.6);
+  animation:rotate 6s linear infinite;
+  animation-play-state:paused;
+}
+
+/* Rotate when play */
+#play:checked ~ .cover{
+  animation-play-state:running;
+}
+
+@keyframes rotate{
+  100%{ transform:rotate(360deg); }
+}
+
+/* Song Info */
+.song{
+  overflow:hidden;
+  white-space:nowrap;
+  margin-bottom:6px;
+}
+
+/* Scrolling song name */
+.song h2{
+  display:inline-block;
+  padding-left:100%;
+  font-size:18px;
+  animation:scroll 10s linear infinite;
+  animation-play-state:paused;
+}
+
+/* Scroll only when playing */
+#play:checked ~ .song h2{
+  animation-play-state:running;
+}
+
+@keyframes scroll{
+  0%{ transform:translateX(0); }
+  100%{ transform:translateX(-100%); }
+}
+
+.song p{
+  font-size:13px;
+  color:#ccc;
+  text-align:center;
+  margin-top:4px;
+}
+
+/* Controls */
+.controls{
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  margin:18px 0;
+}
+
+.btn{
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.15);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.btn:hover{
+  background:#1db954;
+}
+
+.play-btn{
+  width:60px;
+  height:60px;
+  background:#1db954;
+  font-size:20px;
+}
+
+/* Play/Pause Icon */
+.play-icon::before{
+  content:"▶";
+}
+
+#play:checked + label .play-icon::before{
+  content:"⏸";
+}
+
+/* Volume */
+.volume{
+  margin-top:10px;
+}
+
+.volume label{
+  font-size:13px;
+  color:#ccc;
+}
+
+input[type=range]{
+  width:100%;
+  margin-top:8px;
+  -webkit-appearance:none;
+  background:transparent;
+}
+
+input[type=range]::-webkit-slider-runnable-track{
+  height:6px;
+  background:rgba(255,255,255,0.2);
+  border-radius:10px;
+}
+
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  width:16px;
+  height:16px;
+  background:#1db954;
+  border-radius:50%;
+  margin-top:-5px;
+  cursor:pointer;
+}
+
+.volume-icons{
+  display:flex;
+  justify-content:space-between;
+  font-size:14px;
+  color:#ccc;
+  margin-top:4px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="player">
+
+  <!-- Play Toggle -->
+  <input type="checkbox" id="play">
+
+  <!-- Album -->
+  <div class="cover"></div>
+
+  <!-- Song Info -->
+  <div class="song">
+    <h2>Blinding Lights - The Weeknd • Sample Music Player UI</h2>
+    <p>The Weeknd</p>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls">
+    <div class="btn">⏮</div>
+
+    <!-- SINGLE Play/Pause Button -->
+    <label for="play" class="btn play-btn">
+      <span class="play-icon"></span>
+    </label>
+
+    <div class="btn">⏭</div>
+  </div>
+
+  <!-- Volume -->
+  <div class="volume">
+    <label>Volume</label>
+    <input type="range" min="0" max="100" value="60">
+    <div class="volume-icons">
+      <span>🔈</span>
+      <span>🔊</span>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
